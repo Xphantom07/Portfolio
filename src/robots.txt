@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /dist/
+
+
+# Sitemap location
+
+Sitemap: https://Xphantom07.vercel.app/sitemap.xml
+
+# Additional sitemaps
+
+Sitemap: https://Xphantom07.vercel.app/sitemap.xml

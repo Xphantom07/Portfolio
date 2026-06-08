@@ -1,0 +1,108 @@
+:host {
+  display: block;
+}
+
+#certifications {
+  scroll-margin-top: 6rem;
+}
+
+/* Clean, image-forward certification grid */
+.cert-grid {
+  display: grid;
+}
+
+.cert-card {
+  background: rgba(255,255,255,0.02);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.cert-media {
+  width: 100%;
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));
+}
+
+.cert-photo {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  background: transparent;
+}
+
+.cert-badge {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 10;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.65rem;
+  border-radius: 9999px;
+  background: rgba(0,0,0,0.45);
+  color: #9AE6B4;
+  border: 1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(4px);
+}
+
+.cert-gradient {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 48%;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.12));
+  pointer-events: none;
+}
+
+.cert-card::before {
+  content: '';
+  position: absolute;
+  left: -40px;
+  top: -24px;
+  width: 120px;
+  height: 36px;
+  background: linear-gradient(90deg, rgba(34,197,94,0.14), rgba(16,185,129,0.06));
+  transform: rotate(-18deg);
+  opacity: 0.7;
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.cert-card {
+  transition: transform 300ms cubic-bezier(.2,.9,.2,1), box-shadow 300ms ease;
+}
+
+.cert-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 40px 80px rgba(2,6,23,0.6);
+}
+
+.cert-photo {
+  transition: transform 600ms cubic-bezier(.2,.9,.2,1), filter 300ms ease;
+}
+
+.cert-card:hover .cert-photo { transform: scale(1.06) translateY(-6px); filter: drop-shadow(0 18px 40px rgba(2,6,23,0.6)); }
+
+.tag { transition: transform 220ms ease, background-color 220ms ease; }
+.cert-card:hover .tag { transform: translateY(-4px); background: rgba(34,197,94,0.12); }
+
+.cert-body { }
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  border-radius: 9999px;
+  background: rgba(34,197,94,0.07);
+  color: #9AE6B4;
+  border: 1px solid rgba(34,197,94,0.12);
+}
+
+@media (min-width: 768px) {
+  .cert-photo { height: 180px; }
+}
+
+@media (min-width: 1024px) {
+  .cert-photo { height: 220px; }
+}

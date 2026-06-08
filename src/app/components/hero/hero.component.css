@@ -1,0 +1,201 @@
+:host {
+  display: block;
+}
+
+.hero-shell {
+  position: relative;
+}
+
+.eyebrow {
+  color: rgb(74 222 128 / 1);
+  font-family: monospace;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(74, 222, 128, 0.22);
+  background: rgba(74, 222, 128, 0.08);
+  color: rgb(190 242 212 / 1);
+  padding: 0.55rem 0.95rem;
+  font-size: 0.8rem;
+  transition: transform 200ms ease, border-color 200ms ease, background-color 200ms ease;
+}
+
+.hero-pill:hover {
+  transform: translateY(-2px);
+  border-color: rgba(74, 222, 128, 0.4);
+  background: rgba(74, 222, 128, 0.12);
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid rgb(74 222 128 / 1);
+  background: rgb(74 222 128 / 0.12);
+  color: rgb(187 247 208 / 1);
+  padding: 0.95rem 1.4rem;
+  font-weight: 600;
+  transition: transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px);
+  background: rgb(74 222 128 / 0.18);
+  box-shadow: 0 18px 50px rgba(34, 197, 94, 0.18);
+}
+
+.hero-link {
+  color: rgb(148 163 184 / 1);
+  transition: color 200ms ease;
+}
+
+.hero-link:hover {
+  color: rgb(226 232 240 / 1);
+}
+
+.portrait-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  background:
+    radial-gradient(circle at top, rgba(74, 222, 128, 0.16), transparent 42%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(2, 6, 23, 0.96));
+  padding: 0.9rem;
+  box-shadow: 0 35px 100px rgba(0, 0, 0, 0.48);
+  animation: floatCard 7s ease-in-out infinite;
+}
+
+.portrait-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.45rem;
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(74,222,128,0.02));
+}
+
+.portrait-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255,255,255,0.12), transparent 32%),
+    radial-gradient(circle at 82% 24%, rgba(74, 222, 128, 0.18), transparent 28%),
+    linear-gradient(180deg, transparent 0%, rgba(2, 6, 23, 0.08) 60%, rgba(2, 6, 23, 0.28) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.portrait-frame::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.portrait-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transform: scale(1.02);
+  filter: saturate(1.03) contrast(1.03);
+}
+
+.portrait-orbit {
+  position: absolute;
+  inset: -18px;
+  border-radius: 2.5rem;
+  background: radial-gradient(circle, rgba(34,197,94,0.18), transparent 55%);
+  filter: blur(24px);
+  animation: orbitPulse 5.5s ease-in-out infinite;
+}
+
+.portrait-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 0.2rem 0.2rem 0.1rem;
+}
+
+.caption-label {
+  color: rgb(226 232 240 / 1);
+  font-weight: 600;
+}
+
+.caption-subtitle {
+  color: rgb(148 163 184 / 1);
+  font-size: 0.85rem;
+}
+
+.caption-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background: rgb(74 222 128 / 1);
+  box-shadow: 0 0 0 8px rgba(74, 222, 128, 0.12);
+  animation: pulseDot 2.4s ease-in-out infinite;
+}
+
+.hero-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.hero-glow-left {
+  left: -40px;
+  top: 15%;
+  width: 16rem;
+  height: 16rem;
+  background: rgba(34, 197, 94, 0.14);
+}
+
+.hero-glow-right {
+  right: 2%;
+  bottom: 5%;
+  width: 18rem;
+  height: 18rem;
+  background: rgba(20, 184, 166, 0.11);
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes orbitPulse {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  50% { transform: scale(1.06); opacity: 0.8; }
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@media (max-width: 1023px) {
+  .hero-shell {
+    padding-top: 1rem;
+  }
+
+  .portrait-card {
+    max-width: 26rem;
+  }
+}
