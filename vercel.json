@@ -4,7 +4,7 @@
   "buildCommand": "npm run build:prod",
   "functions": {
     "api/index.js": {
-      "includeFiles": "dist/portfolio/**"
+      "includeFiles": "dist/**"
     }
   }
 }
