@@ -2,6 +2,16 @@
   "version": 2,
   "public": true,
   "buildCommand": "npm run build:prod",
+  "rewrites": [
+    {
+      "source": "/assets/(.*)",
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/api"
+    }
+  ],
   "functions": {
     "api/index.js": {
       "includeFiles": "dist/portfolio/**"
