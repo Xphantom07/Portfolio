@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
 
     const revealNext = () => {
       if (index >= this.splashName.length) {
-        setTimeout(() => this.hideSplash(), 600);
+        setTimeout(() => this.hideSplash(), 900);
         return;
       }
 
@@ -71,20 +71,20 @@ export class AppComponent implements OnInit {
         return;
       }
 
-      const totalFrames = 5 + Math.floor(Math.random() * 6);
+      const totalFrames = 6 + Math.floor(Math.random() * 4);
       let frame = 0;
 
       const step = () => {
         if (frame >= totalFrames) {
           this.displayedChars[index] = this.splashName[index];
           index += 1;
-          setTimeout(revealNext, 90);
+          setTimeout(revealNext, 120);
           return;
         }
 
         this.displayedChars[index] = this.randomChars[Math.floor(Math.random() * this.randomChars.length)];
         frame += 1;
-        setTimeout(step, 70);
+        setTimeout(step, 90);
       };
 
       step();
@@ -95,5 +95,9 @@ export class AppComponent implements OnInit {
 
   private hideSplash() {
     this.showSplash = false;
+    if (typeof window !== 'undefined') {
+      window.document.documentElement.classList.add('splash-done');
+      window.dispatchEvent(new Event('splashEnd'));
+    }
   }
 }

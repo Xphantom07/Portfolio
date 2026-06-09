@@ -71,11 +71,20 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      import('aos').then(AOS => AOS.default.init({
-        duration: 1000,
-        once: true,
-        mirror: false
-      }));
+      const initAos = () => {
+        import('aos').then(AOS => AOS.default.init({
+          duration: 1000,
+          once: true,
+          mirror: false
+        }));
+      };
+
+      if (document.documentElement.classList.contains('splash-done')) {
+        initAos();
+      } else {
+        window.addEventListener('splashEnd', initAos, { once: true });
+      }
+
       window.scrollTo(0, 0);
     }
   }
