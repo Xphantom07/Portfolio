@@ -25,6 +25,11 @@ import { SeoService } from './service/seo.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  showSplash = true;
+  splashName = 'Bhavik Vavadiya';
+  displayedChars: string[] = [];
+  private randomChars = ['@', '#', '$', '%', '&', '*', '+', '-', '=', '<', '>', '?', '!', '•', '★', '¤', '§', '♪', '♫'];
+
   constructor(
     private googleAnalyticsService: GoogleAnalyticsService,
     private seoService: SeoService
@@ -32,6 +37,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.googleAnalyticsService.loadGoogleAnalytics();
+    this.initSplash();
 
 
 
@@ -46,5 +52,48 @@ export class AppComponent implements OnInit {
 
     // Ensure canonical URL is set for current page
     this.seoService.setCanonicalForCurrentPage();
+  }
+
+  private initSplash() {
+    this.displayedChars = Array.from(this.splashName).map(char => (char === ' ' ? ' ' : ''));
+    let index = 0;
+
+    const revealNext = () => {
+      if (index >= this.splashName.length) {
+        setTimeout(() => this.hideSplash(), 600);
+        return;
+      }
+
+      if (this.splashName[index] === ' ') {
+        this.displayedChars[index] = ' ';
+        index += 1;
+        revealNext();
+        return;
+      }
+
+      const totalFrames = 5 + Math.floor(Math.random() * 6);
+      let frame = 0;
+
+      const step = () => {
+        if (frame >= totalFrames) {
+          this.displayedChars[index] = this.splashName[index];
+          index += 1;
+          setTimeout(revealNext, 90);
+          return;
+        }
+
+        this.displayedChars[index] = this.randomChars[Math.floor(Math.random() * this.randomChars.length)];
+        frame += 1;
+        setTimeout(step, 70);
+      };
+
+      step();
+    };
+
+    revealNext();
+  }
+
+  private hideSplash() {
+    this.showSplash = false;
   }
 }

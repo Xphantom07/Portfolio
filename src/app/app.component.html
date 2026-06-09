@@ -1,3 +1,10 @@
+<div *ngIf="showSplash" class="splash-overlay">
+  <div class="splash-inner">
+    <div class="splash-text">{{ displayedChars.join('') }}</div>
+    <div class="splash-subtitle">Loading Portfolio...</div>
+  </div>
+</div>
+
 <div class="min-h-screen flex flex-col">
   <app-header></app-header>
 

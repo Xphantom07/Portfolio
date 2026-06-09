@@ -6,6 +6,54 @@ header.hidden {
   transform: translateY(-100%);
 }
 
+.splash-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1.5rem;
+}
+
+.splash-inner {
+  text-align: center;
+}
+
+.splash-text {
+  color: #ffffff;
+  font-size: clamp(2.75rem, 5vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.24em;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  white-space: pre;
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.18));
+}
+
+.splash-subtitle {
+  margin-top: 1.25rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .splash-text {
+    font-size: clamp(2rem, 10vw, 4rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .splash-text {
+    letter-spacing: 0.16em;
+  }
+}
+
 @media (max-width: 768px) {
   .footer {
     display: block;
