@@ -48,8 +48,8 @@ export class SkillsComponent {
 
   opss = [
     { name: 'Git', logo: 'https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/git/git-original.svg', isInvertLogo: false, proficiency: 'Expert', experience: 5 },
-    { name: 'GitHub', logo: 'https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/github/github-original.svg', isInvertLogo: false, proficiency: 'Expert', experience: 5 },
-    { name: 'Power BI', logo: 'https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/powerbi/powerbi-original.svg', isInvertLogo: false, proficiency: 'Intermediate', experience: 2 },
+    { name: 'GitHub', logo: 'https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/github/github-original.svg', isInvertLogo: true, proficiency: 'Expert', experience: 5 },
+    { name: 'Power BI', logo: 'https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/powerbi/powerbi-original.svg', isInvertLogo: true, proficiency: 'Intermediate', experience: 2 },
     { name: 'Excel', logo: 'https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/microsoftsqlserver/microsoftsqlserver-plain.svg', isInvertLogo: false, proficiency: 'Intermediate', experience: 3 },
     { name: 'Vercel', logo: 'https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/vercel/vercel-original.svg', isInvertLogo: true, proficiency: 'Intermediate', experience: 2 },
     { name: 'Firebase', logo: 'https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/firebase/firebase-original.svg', isInvertLogo: false, proficiency: 'Beginner', experience: 1 }

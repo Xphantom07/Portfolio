@@ -4,6 +4,28 @@
 
 .hero-shell {
   position: relative;
+  overflow: hidden;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+/* hero overlay removed to let background show through */
+
+.hero-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-glow-left {
+  left: -60px;
+  width: 20rem;
+  height: 20rem;
+}
+
+.hero-glow-right {
+  right: -30px;
+  width: 22rem;
+  height: 22rem;
 }
 
 .eyebrow {

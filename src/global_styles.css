@@ -4,10 +4,10 @@
 @tailwind utilities;
 
 :root {
-  --slate: #8892b0;
-  --light-slate: #a8b2d1;
-  --lightest-slate: #ccd6f6;
-  --white: #e6f1ff;
+  --slate: #dce6ff;
+  --light-slate: #ecf2ff;
+  --lightest-slate: #f8fbff;
+  --white: #ffffff;
   --green: #64ffda;
 }
 
@@ -15,7 +15,12 @@ html {
   scrollbar-width: thin;
   scrollbar-color: grey black;
   scroll-behavior: smooth;
-  background-color: black;
+  background-image: url('/assets/Bg.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color: #050816;
   color: var(--slate);
   font-display: swap;
 }
@@ -25,6 +30,85 @@ body {
   font-display: swap;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  background: transparent;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(100, 255, 218, 0.12), transparent 24%),
+              radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.08), transparent 20%),
+              linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.72));
+  pointer-events: none;
+  z-index: -1;
+}
+
+main#content,
+.section-container,
+.hero-shell,
+.portrait-card,
+.cert-card,
+footer,
+.footer,
+header {
+  background: rgba(8, 12, 23, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+header {
+  position: fixed;
+  inset: 0 auto auto 0;
+  width: 100%;
+  z-index: 70;
+  transform: translateY(0);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease-out;
+  will-change: transform, opacity;
+  opacity: 1;
+}
+
+header > .main-nav {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 70;
+  background: rgba(0, 0, 0, 0.48) !important;
+}
+
+header.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+footer,
+.footer {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+main#content {
+  background: transparent !important;
+}
+
+.section-container {
+  background: transparent !important;
+  border: none;
+}
+
+.section-container input,
+.section-container textarea {
+  background: rgba(15, 23, 42, 0.9);
+  color: #f8fbff;
+  border-color: rgba(148, 163, 184, 0.32);
+}
+
+.section-container input::placeholder,
+.section-container textarea::placeholder {
+  color: rgba(236, 242, 255, 0.55);
 }
 
 html,
@@ -50,7 +134,7 @@ body {
 
   /* Navigation Links with enhanced accessibility */
   .nav-link {
-    @apply relative text-sm font-medium text-slate hover:text-green-400 transition-all duration-300 focus:outline-2 focus:outline-offset-2 focus:outline-green-400;
+    @apply relative text-sm font-medium text-white/90 hover:text-green-400 transition-all duration-300 focus:outline-2 focus:outline-offset-2 focus:outline-green-400;
   }
 
   .nav-link::after {
@@ -67,6 +151,7 @@ body {
   .section-container {
     @apply max-w-6xl mx-auto px-4 py-8 xs:px-4 sm:px-6 md:px-8 lg:px-8 xl:px-12;
   }
+  
 
   /* Section Title styling */
   .section-title {

@@ -1,6 +1,6 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -18,9 +18,48 @@ export class HeaderComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: object,
     private router: Router
   ) {
-    this.router.events.subscribe(() => {
-      this.currentRoute = this.router.url.split('?')[0];
+    this.router.events.subscribe((ev) => {
+      if (ev instanceof NavigationEnd) {
+        // update current route (path without query/fragment)
+        this.currentRoute = this.router.url.split('?')[0].split('#')[0];
+
+        // If navigation includes a fragment, attempt to scroll to it
+        const tree = this.router.parseUrl(this.router.url);
+        if (tree.fragment && isPlatformBrowser(this.platformId)) {
+          // small delay to ensure element is rendered
+          setTimeout(() => this.scrollTo(tree.fragment as string), 60);
+        }
+      }
     });
+  }
+
+  goToSection(id: string, event?: Event) {
+    if (event) {
+      event.preventDefault();
+    }
+
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    // If we're already on the homepage, just scroll
+    if (this.currentRoute === '/' || this.currentRoute === '') {
+      this.scrollTo(id);
+      return;
+    }
+
+    // Otherwise navigate to home with fragment, then scroll after navigation
+    this.router.navigate(['/'], { fragment: id }).then(() => {
+      setTimeout(() => this.scrollTo(id), 80);
+    });
+  }
+
+  private scrollTo(id: string) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // fallback: smooth scroll to top when id not found
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   isRouteActive(route: string): boolean {

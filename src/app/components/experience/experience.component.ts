@@ -19,7 +19,7 @@ export class ExperienceComponent {
     {
       position: 'Web Developer',
       company: 'IT Hub Software',
-      companyUrl: '',
+      companyUrl: 'https://drive.google.com/drive/u/0/folders/1RuV043pRfCXsMMfSQucUfNY5Of6QTU2_',
       startDate: 'Jun 2024',
       endDate: 'Jul 2024',
       achievements: [
@@ -32,7 +32,7 @@ export class ExperienceComponent {
     {
       position: 'Android Developer',
       company: 'Kryosync',
-      companyUrl: '',
+      companyUrl: 'https://drive.google.com/file/d/13QDmsRZCfJUhAbX3cqjyv4LPL1EwIM5Z/view?usp=sharing',
       startDate: 'Jun 2025',
       endDate: 'Jul 2025',
       achievements: [
