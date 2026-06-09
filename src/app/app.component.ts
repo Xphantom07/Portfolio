@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
   showSplash = true;
   splashName = 'Bhavik Vavadiya';
   displayedChars: string[] = [];
+  splashFading = false;
   private randomChars = ['@', '#', '$', '%', '&', '*', '+', '-', '=', '<', '>', '?', '!', '•', '★', '¤', '§', '♪', '♫'];
 
   constructor(
@@ -60,7 +61,7 @@ export class AppComponent implements OnInit {
 
     const revealNext = () => {
       if (index >= this.splashName.length) {
-        setTimeout(() => this.hideSplash(), 900);
+        setTimeout(() => this.hideSplash(), 600);
         return;
       }
 
@@ -71,20 +72,20 @@ export class AppComponent implements OnInit {
         return;
       }
 
-      const totalFrames = 6 + Math.floor(Math.random() * 4);
+      const totalFrames = 4 + Math.floor(Math.random() * 3);
       let frame = 0;
 
       const step = () => {
         if (frame >= totalFrames) {
           this.displayedChars[index] = this.splashName[index];
           index += 1;
-          setTimeout(revealNext, 120);
+          setTimeout(revealNext, 60);
           return;
         }
 
         this.displayedChars[index] = this.randomChars[Math.floor(Math.random() * this.randomChars.length)];
         frame += 1;
-        setTimeout(step, 90);
+        setTimeout(step, 60);
       };
 
       step();
@@ -94,10 +95,14 @@ export class AppComponent implements OnInit {
   }
 
   private hideSplash() {
-    this.showSplash = false;
-    if (typeof window !== 'undefined') {
-      window.document.documentElement.classList.add('splash-done');
-      window.dispatchEvent(new Event('splashEnd'));
-    }
+    // fade first, then remove from DOM so animations can start smoothly
+    this.splashFading = true;
+    setTimeout(() => {
+      this.showSplash = false;
+      if (typeof window !== 'undefined') {
+        window.document.documentElement.classList.add('splash-done');
+        window.dispatchEvent(new Event('splashEnd'));
+      }
+    }, 360);
   }
 }

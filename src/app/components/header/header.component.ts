@@ -55,7 +55,11 @@ export class HeaderComponent implements OnInit {
   private scrollTo(id: string) {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // If header is fixed, offset the scroll so the section isn't hidden behind it
+      const headerEl = document.querySelector('header');
+      const headerHeight = headerEl ? (headerEl as HTMLElement).offsetHeight : 72;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - headerHeight - 8;
+      window.scrollTo({ top, behavior: 'smooth' });
     } else {
       // fallback: smooth scroll to top when id not found
       window.scrollTo({ top: 0, behavior: 'smooth' });

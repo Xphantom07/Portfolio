@@ -1,4 +1,4 @@
-<div *ngIf="showSplash" class="splash-overlay">
+<div *ngIf="showSplash" [class.splash-fade]="splashFading" class="splash-overlay">
   <div class="splash-inner">
     <div class="splash-text">{{ displayedChars.join('') }}</div>
     <div class="splash-subtitle">Loading Portfolio...</div>
