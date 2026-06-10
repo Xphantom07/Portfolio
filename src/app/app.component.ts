@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
@@ -24,7 +24,7 @@ import { SeoService } from './service/seo.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   showSplash = true;
   splashName = 'Bhavik Vavadiya';
   displayedChars: string[] = [];
@@ -56,6 +56,17 @@ export class AppComponent implements OnInit {
 
     // Ensure canonical URL is set for current page
     this.seoService.setCanonicalForCurrentPage();
+  }
+
+  ngAfterViewInit(): void {
+    // hide/remove the initial static splash that lives in index.html
+    if (typeof document !== 'undefined') {
+      const initial = document.getElementById('initial-splash');
+      if (initial) {
+        // hide immediately; the component splash is already rendered
+        initial.style.display = 'none';
+      }
+    }
   }
 
   private initSplash() {
