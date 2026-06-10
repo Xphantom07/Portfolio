@@ -23,7 +23,7 @@
               "optimization": {
                 "scripts": true,
                 "styles": true,
-                "fonts": true
+                "fonts": false
               },
               "outputHashing": "all",
               "sourceMap": false,
