@@ -1,6 +1,14 @@
 <div *ngIf="showSplash" [class.splash-fade]="splashFading" class="splash-overlay">
   <div class="splash-inner">
-    <div class="splash-text">{{ displayedChars.join('') }}</div>
+    <div class="splash-text" aria-hidden="true">
+      <ng-container *ngFor="let ch of displayedChars; let i = index">
+        <span
+          class="splash-letter"
+          [class.pop]="animStates[i] === 'active' || animStates[i] === 'active-last'"
+          [class.last-name]="i >= lastStart && i < (lastStart + lastLength)"
+        >{{ ch }}</span>
+      </ng-container>
+    </div>
     <div class="splash-subtitle">Loading Portfolio...</div>
   </div>
 </div>

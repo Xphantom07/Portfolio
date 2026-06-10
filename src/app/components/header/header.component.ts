@@ -110,10 +110,33 @@ export class HeaderComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       if (this.isMenuOpen) {
         document.body.style.overflow = 'hidden';
-        document.body.classList.add('no-scroll');
+        document.body.classList.add('no-scroll', 'menu-open');
+        // move the mobile menu wrapper to document.body to escape header stacking contexts
+        setTimeout(() => {
+          try {
+            const menuRoot = document.getElementById('mobile-menu-root');
+            if (menuRoot && menuRoot.parentElement !== document.body) {
+              document.body.appendChild(menuRoot);
+            }
+          } catch (e) {
+            // ignore DOM errors
+          }
+        }, 0);
       } else {
         document.body.style.overflow = '';
-        document.body.classList.remove('no-scroll');
+        document.body.classList.remove('no-scroll', 'menu-open');
+        // move the mobile menu wrapper back into the header so Angular keeps its structure
+        setTimeout(() => {
+          try {
+            const menuRoot = document.getElementById('mobile-menu-root');
+            const headerEl = document.querySelector('header');
+            if (menuRoot && headerEl && menuRoot.parentElement !== headerEl) {
+              headerEl.appendChild(menuRoot);
+            }
+          } catch (e) {
+            // ignore DOM errors
+          }
+        }, 0);
       }
     }
   }

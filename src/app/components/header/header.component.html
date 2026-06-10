@@ -39,14 +39,14 @@
   </nav>
 
   <!-- Mobile Sidebar - Moved outside nav -->
-  <div class="md:hidden" *ngIf="isMenuOpen">
+  <div id="mobile-menu-root" class="md:hidden" *ngIf="isMenuOpen">
     <!-- Backdrop -->
-    <div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-40" (click)="toggleMenu()"></div>
+    <div class="fixed inset-0 bg-black/10 backdrop-blur-sm z-40 menu-backdrop" (click)="toggleMenu()" style="-webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);"></div>
 
     <!-- Sidebar -->
-    <div class="fixed right-0 top-0 w-[min(75vw,320px)] h-full z-50 mobile-drawer border-l border-gray-800 shadow-2xl bg-[#020613] bg-opacity-100" style="right: 0 !important; left: auto !important; -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); background-color: rgba(0, 0, 0, 0.96) !important; background-image: none !important; opacity: 1 !important;">
+    <div class="fixed right-0 top-0 w-[min(75vw,320px)] h-full z-50 border-l border-gray-800 shadow-2xl mobile-drawer backdrop-blur-xl" style="z-index: 100001 !important; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); background-color: #000 !important;">
       <!-- Close Button -->
-      <div class="flex justify-between items-center px-4 xs:px-5 py-3 xs:py-4 border-b border-gray-700">
+      <div class="flex justify-between items-center px-4 xs:px-5 py-3 xs:py-4 border-b border-gray-700/60">
         <span class="text-lg font-semibold text-white">Menu</span>
         <button (click)="toggleMenu()" aria-label="Close menu"
           class="p-2.5 xs:p-3 text-green-400 hover:text-green-300 transition-colors focus:outline-2 focus:outline-offset-2 focus:outline-green-400 min-h-touch min-w-touch flex items-center justify-center">
@@ -59,27 +59,27 @@
       <!-- Mobile Menu Links -->
       <nav class="flex flex-col px-3 xs:px-4 py-4 xs:py-6 space-y-1.5 xs:space-y-2" role="menu" aria-label="Mobile navigation menu">
         <a href="#content" (click)="goToSection('content', $event); toggleMenu()"
-          class="block py-3 xs:py-3.5 px-3 xs:px-4 text-white hover:text-green-400 hover:bg-gray-800 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-green-400 rounded min-h-touch"
+          class="block py-3 xs:py-3.5 px-3 xs:px-4 text-white hover:text-green-400 hover:bg-white/5 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-green-400 rounded min-h-touch"
           role="menuitem">
           Home
         </a>
         <a href="#about-me" (click)="goToSection('about-me', $event); toggleMenu()"
-          class="block py-3 xs:py-3.5 px-3 xs:px-4 text-white hover:text-green-400 hover:bg-gray-800 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-green-400 rounded min-h-touch"
+          class="block py-3 xs:py-3.5 px-3 xs:px-4 text-white hover:text-green-400 hover:bg-white/5 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-green-400 rounded min-h-touch"
           role="menuitem">
           About
         </a>
         <a href="#experience" (click)="goToSection('experience', $event); toggleMenu()"
-          class="block py-3 xs:py-3.5 px-3 xs:px-4 text-white hover:text-green-400 hover:bg-gray-800 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-green-400 rounded min-h-touch"
+          class="block py-3 xs:py-3.5 px-3 xs:px-4 text-white hover:text-green-400 hover:bg-white/5 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-green-400 rounded min-h-touch"
           role="menuitem">
           Experience
         </a>
         <a href="#projects" (click)="goToSection('projects', $event); toggleMenu()"
-          class="block py-3 xs:py-3.5 px-3 xs:px-4 text-white hover:text-green-400 hover:bg-gray-800 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-green-400 rounded min-h-touch"
+          class="block py-3 xs:py-3.5 px-3 xs:px-4 text-white hover:text-green-400 hover:bg-white/5 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-green-400 rounded min-h-touch"
           role="menuitem">
           Projects
         </a>
         <a href="#contact" (click)="goToSection('contact', $event); toggleMenu()"
-          class="block py-3 xs:py-3.5 px-3 xs:px-4 text-white hover:text-green-400 hover:bg-gray-800 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-green-400 rounded min-h-touch"
+          class="block py-3 xs:py-3.5 px-3 xs:px-4 text-white hover:text-green-400 hover:bg-white/5 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-green-400 rounded min-h-touch"
           role="menuitem">
           Contact
         </a>
