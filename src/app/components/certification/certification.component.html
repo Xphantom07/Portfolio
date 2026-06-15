@@ -6,19 +6,31 @@
     </div>
 
     <div class="cert-grid grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-aos="fade-up" data-aos-delay="80">
-      @for (certificate of certificates; track certificate.title; let i = $index) {
+      @for (certificate of displayedCertificates; track certificate.title; let i = $index) {
       <article class="cert-card group rounded-2xl overflow-hidden bg-surface border border-white/6 shadow-lg transition-transform duration-300 hover:-translate-y-1"
         [attr.data-aos]="'fade-up'" [attr.data-aos-delay]="i * 70" [attr.data-aos-duration]="700" [attr.data-aos-easing]="'ease-out-cubic'">
-        <div class="cert-media">
+          <div class="cert-media">
           <div class="cert-badge">{{ certificate.issuer }}</div>
-          <img [src]="certificate.image" [alt]="certificate.alt" loading="lazy" class="cert-photo" />
+          @if (certificate.link) {
+            <a [href]="certificate.link" target="_blank" rel="noopener noreferrer">
+              <img [src]="certificate.image" [alt]="certificate.alt" loading="lazy" class="cert-photo" />
+            </a>
+          }
+          @else {
+            <img [src]="certificate.image" [alt]="certificate.alt" loading="lazy" class="cert-photo" />
+          }
           <div class="cert-gradient" aria-hidden="true"></div>
         </div>
 
         <div class="cert-body p-4 sm:p-5">
           <div class="flex items-start justify-between">
             <div>
+              @if (certificate.link) {
+              <h3 class="text-lg font-semibold text-lightest-slate"><a [href]="certificate.link" target="_blank" rel="noopener noreferrer">{{ certificate.title }}</a></h3>
+              }
+              @else {
               <h3 class="text-lg font-semibold text-lightest-slate">{{ certificate.title }}</h3>
+              }
               <p class="text-xs text-slate mt-1">{{ certificate.issuer }}</p>
             </div>
             <div class="text-sm text-green-400 font-medium">0{{ i + 1 }}</div>
@@ -35,5 +47,12 @@
       </article>
       }
     </div>
+    @if (isMobile && visibleCount < certificates.length) {
+    <div class="mt-6 flex justify-center" data-aos="fade-up" data-aos-delay="120">
+      <button (click)="loadMore()" class="inline-flex items-center px-6 py-2 bg-gradient-to-r from-green-400 to-green-500 text-black font-bold rounded-lg hover:shadow-xl transition-all">
+        Load more
+      </button>
+    </div>
+    }
   </div>
 </section>
