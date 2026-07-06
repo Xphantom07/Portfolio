@@ -1,44 +1,33 @@
-# Portfolio Website
+# 🌐 Bhavik's Portfolio
 
-A modern, responsive portfolio website built with **Angular** and **Server-Side Rendering (SSR)**. This project is designed to showcase your skills, projects, and contact information in a visually appealing and accessible way.
+A modern portfolio website built with Angular and Server-Side Rendering (SSR). It showcases my projects, technical skills, certifications, and contact information.
 
-### Steps
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Xphantom07/portfolio-site.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd portfolio-site
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
+## 🚀 Live Website
 
+https://iambhavik.dev
 
-## 🖥️ Running the Application
+## ✨ Features
 
-### Development Server
-Start the development server with live reload:
-```bash
-ng serve
-```
+- Responsive design
+- Angular + SSR
+- Project showcase
+- Skills section
+- Contact form
+- Fast loading
+- SEO optimized
 
-### Build for Production
-Build the project for production:
-```bash
-ng build:prod
-```
+## 🛠️ Tech Stack
 
-### Server-Side Rendering
-Build and serve the application with SSR:
-```bash
-npm run build:ssr
-npm run serve:ssr
-```
+- Angular
+- TypeScript
+- SCSS
+- Angular Universal (SSR)
+- Vercel
 
-## 🌐 Demo
+## 📬 Contact
 
-Check out the site: [https://Xphantom07.vercel.app](https://Xphantom07.vercel.app/)
+- Website: https://iambhavik.dev
+- LinkedIn: https://www.linkedin.com/in/bhavik-vavadiya-602660284/
+- Email: bhavikprajapati28195@gmail.com
 
+> This repository contains the source code for my personal portfolio website.

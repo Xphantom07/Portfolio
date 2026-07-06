@@ -236,10 +236,16 @@
     margin-right: 0;
     border-radius: 1rem;
     padding: 0.6rem;
+    animation: none;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
   }
 
   .portrait-frame {
     aspect-ratio: 3 / 4;
+  }
+
+  .portrait-orbit {
+    display: none;
   }
 
   .hero-glow-left, .hero-glow-right {

@@ -13,7 +13,7 @@ export class GoogleAnalyticsService {
   constructor(@Inject(DOCUMENT) private document: Document) { }
 
   loadGoogleAnalytics(): void {
-    if (this.isScriptLoaded || !environment.production || !environment.googleAnalyticsId) {
+    if (this.isScriptLoaded || !environment.production || !environment.googleAnalyticsId || typeof window === 'undefined') {
       return;
     }
 
@@ -25,30 +25,33 @@ export class GoogleAnalyticsService {
 
     this.isScriptLoaded = true;
 
-    const gaScript = this.document.createElement('script');
-    gaScript.async = true;
-    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${environment.googleAnalyticsId}`;
+    window.setTimeout(() => {
+      const gaScript = this.document.createElement('script');
+      gaScript.async = true;
+      gaScript.defer = true;
+      gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${environment.googleAnalyticsId}`;
 
-    const head = this.document.head;
-    if (head.firstChild) {
-      head.insertBefore(gaScript, head.firstChild);
-    } else {
-      head.appendChild(gaScript);
-    }
+      const head = this.document.head;
+      if (head.firstChild) {
+        head.insertBefore(gaScript, head.firstChild);
+      } else {
+        head.appendChild(gaScript);
+      }
 
-    const inlineScript = this.document.createElement('script');
-    inlineScript.text = `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '${environment.googleAnalyticsId}');
-    `;
+      const inlineScript = this.document.createElement('script');
+      inlineScript.text = `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${environment.googleAnalyticsId}');
+      `;
 
-    if (gaScript.nextSibling) {
-      head.insertBefore(inlineScript, gaScript.nextSibling);
-    } else {
-      head.appendChild(inlineScript);
-    }
+      if (gaScript.nextSibling) {
+        head.insertBefore(inlineScript, gaScript.nextSibling);
+      } else {
+        head.appendChild(inlineScript);
+      }
+    }, 1500);
   }
 
   trackResumeDownload(): void {

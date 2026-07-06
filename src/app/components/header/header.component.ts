@@ -1,5 +1,5 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -8,11 +8,13 @@ import { Router, RouterModule, NavigationEnd } from '@angular/router';
   imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   isMenuOpen = false;
   lastScrollTop = 0;
   isHeaderHidden = false;
   currentRoute = '';
+  private scrollRafId: number | null = null;
+  private handleScrollBound = () => this.handleScroll();
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
@@ -76,10 +78,23 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       const initAos = () => {
+        if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+          return;
+        }
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+          return;
+        }
+
+        const isMobile = window.innerWidth < 1024;
+
         import('aos').then(AOS => AOS.default.init({
-          duration: 1000,
+          duration: isMobile ? 420 : 900,
           once: true,
-          mirror: false
+          mirror: false,
+          offset: isMobile ? 24 : 60,
+          delay: isMobile ? 0 : 50
         }));
       };
 
@@ -89,19 +104,39 @@ export class HeaderComponent implements OnInit {
         window.addEventListener('splashEnd', initAos, { once: true });
       }
 
+      window.addEventListener('scroll', this.handleScrollBound, { passive: true });
       window.scrollTo(0, 0);
     }
   }
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    if (currentScroll > this.lastScrollTop) {
-      this.isHeaderHidden = true;
-    } else {
-      this.isHeaderHidden = false;
+  ngOnDestroy(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.removeEventListener('scroll', this.handleScrollBound);
+      if (this.scrollRafId !== null) {
+        window.cancelAnimationFrame(this.scrollRafId);
+      }
     }
-    this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  }
+
+  private handleScroll() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    if (this.scrollRafId !== null) {
+      return;
+    }
+
+    this.scrollRafId = window.requestAnimationFrame(() => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScroll > this.lastScrollTop) {
+        this.isHeaderHidden = true;
+      } else {
+        this.isHeaderHidden = false;
+      }
+      this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+      this.scrollRafId = null;
+    });
   }
 
   toggleMenu() {

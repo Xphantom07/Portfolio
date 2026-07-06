@@ -4,7 +4,7 @@
   </div>
 
   <div class="space-y-20">
-    @for (project of projects; track project; let i = $index) {
+    @for (project of displayedProjects; track project; let i = $index) {
     <div class="relative group" [attr.data-aos]="$index % 2 === 0 ? 'fade-right' : 'fade-left'">
       <div
         class="absolute inset-0 bg-gradient-to-r from-green-400/0 via-green-400/5 to-green-400/0 rounded-2xl pointer-events-none group-hover:from-green-400/10 group-hover:via-green-400/10 group-hover:to-green-400/10 transition-all duration-300">
@@ -58,13 +58,13 @@
             @if (project.sourceUrl) {
             <a [href]="project.sourceUrl" target="_blank" rel="noopener noreferrer"
               class="inline-flex items-center px-4 py-2 border border-green-400 text-green-400 rounded hover:bg-green-400/10 transition-colors text-sm font-medium">
-              Source Code
+              GitHub
             </a>
             }
             @if (project.liveUrl) {
             <a [href]="project.liveUrl" target="_blank" rel="noopener noreferrer"
               class="inline-flex items-center px-4 py-2 border border-slate text-slate rounded hover:text-lightest-slate hover:border-lightest-slate transition-colors text-sm font-medium">
-              Live Demo
+              Live
             </a>
             }
           </div>
@@ -73,5 +73,15 @@
       </div>
     </div>
     }
+
+    @if (isMobile && projects.length > 4) {
+    <div class="flex justify-center pt-2" data-aos="fade-up" data-aos-delay="120">
+      <button type="button" (click)="toggleProjects()"
+        class="inline-flex items-center px-6 py-2.5 rounded-full border border-green-400/60 text-green-300 hover:bg-green-400/10 transition-colors text-sm font-medium">
+        {{ visibleCount >= projects.length ? 'View Less' : 'View More' }}
+      </button>
+    </div>
+    }
+
   </div>
 </section>

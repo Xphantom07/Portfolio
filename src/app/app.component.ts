@@ -59,13 +59,16 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // hide/remove the initial static splash that lives in index.html
     if (typeof document !== 'undefined') {
-      const initial = document.getElementById('initial-splash');
-      if (initial) {
-        // hide immediately; the component splash is already rendered
-        initial.style.display = 'none';
-      }
+      window.setTimeout(() => {
+        const initial = document.getElementById('initial-splash');
+        if (initial) {
+          initial.style.transition = 'opacity 260ms ease, transform 260ms ease';
+          initial.style.opacity = '0';
+          initial.style.transform = 'translateY(-4px)';
+          window.setTimeout(() => initial.remove(), 280);
+        }
+      }, 380);
     }
   }
 
@@ -142,14 +145,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   private hideSplash() {
-    // fade first, then remove from DOM so animations can start smoothly
     this.splashFading = true;
     setTimeout(() => {
       this.showSplash = false;
+      this.splashFading = false;
       if (typeof window !== 'undefined') {
         window.document.documentElement.classList.add('splash-done');
         window.dispatchEvent(new Event('splashEnd'));
       }
-    }, 360);
+    }, 180);
   }
 }

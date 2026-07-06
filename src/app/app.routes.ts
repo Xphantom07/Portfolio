@@ -1,16 +1,10 @@
 import { Routes } from "@angular/router";
-import { HomeComponent } from "./components/home/home.component";
-import { AboutComponent } from "./pages/about/about.component";
-import { ExperienceComponent } from "./pages/experience/experience.component";
-import { ProjectsComponent } from "./pages/projects/projects.component";
-import { ContactComponent } from "./pages/contact/contact.component";
-import { ResumeComponent } from "./pages/resume/resume.component";
 import { UrlNormalizationGuard } from "./guards/url-normalization.guard";
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    loadComponent: () => import('./components/home/home.component').then(m => m.HomeComponent),
     canActivate: [UrlNormalizationGuard],
     data: {
       title: 'Home',
@@ -20,7 +14,7 @@ export const routes: Routes = [
   },
   {
     path: 'about',
-    component: AboutComponent,
+    loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent),
     canActivate: [UrlNormalizationGuard],
     data: {
       title: 'About Me',
@@ -30,7 +24,7 @@ export const routes: Routes = [
   },
   {
     path: 'experience',
-    component: ExperienceComponent,
+    loadComponent: () => import('./pages/experience/experience.component').then(m => m.ExperienceComponent),
     canActivate: [UrlNormalizationGuard],
     data: {
       title: 'Experience',
@@ -40,7 +34,7 @@ export const routes: Routes = [
   },
   {
     path: 'projects',
-    component: ProjectsComponent,
+    loadComponent: () => import('./pages/projects/projects.component').then(m => m.ProjectsComponent),
     canActivate: [UrlNormalizationGuard],
     data: {
       title: 'Projects',
@@ -50,7 +44,7 @@ export const routes: Routes = [
   },
   {
     path: 'contact',
-    component: ContactComponent,
+    loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent),
     canActivate: [UrlNormalizationGuard],
     data: {
       title: 'Contact',
@@ -60,7 +54,7 @@ export const routes: Routes = [
   },
   {
     path: 'resume',
-    component: ResumeComponent,
+    loadComponent: () => import('./pages/resume/resume.component').then(m => m.ResumeComponent),
     canActivate: [UrlNormalizationGuard],
     data: {
       title: 'Resume',
